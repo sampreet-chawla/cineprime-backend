@@ -21,9 +21,6 @@ Team Members: Bojan Josilo, Gourav Auluck, Sampreet Chawla, and Shayan Gagan. Sa
 
 
 
-Squad-Lead: Alex Merced
-
-Team Members: Bojan Josilo, Gourav Auluck, Sampreet Chawla, and Shayan Gagan. Sampreet Chawla is the Tech Lead and Git Master.
 
 
 

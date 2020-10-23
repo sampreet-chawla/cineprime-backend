@@ -11,8 +11,8 @@ Team Members: Bojan Josilo, Gourav Auluck, Sampreet Chawla, and Shayan Gagan. Sa
 | GET                                                      | /watchList                  |    Get All Movies in the List(watched and queued)    |
 | GET                                                      | /watchlist/watched          |     Get all movies with status "watched" listing     |
 | GET                                                      | /watchlist/wantToWatch      |      Get all movies with status "want to watch"      |
-| GET                                                      | /watchlist/sort-plandt-asc  |         Sort by plan date in ascending order         |
-| GET                                                      | /watchlist/sort-plandt-desc |        sort by Plan date in descending order         |
+| GET                                                      | /watchlist/sort-planned-asc  |         Sort by plan date in ascending order         |
+| GET                                                      | /watchlist/sort-planned-desc |        sort by Plan date in descending order         |
 | POST                                                     | /watchlist                  |               Add a movie to watchlist               |
 | POST                                                     | /watchList/planDate/:id     | Add a movie plan date for the movie with specific id |
 | PUT                                                      | /watchList/watchDate/:id    |   Update watchDate for the movie with specific id    |

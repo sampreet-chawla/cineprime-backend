@@ -3,18 +3,18 @@ cineprime-backend is a "cineprime" web applications's backend repo. It is a MERN
 
 API/signin	- landing page with sign in prompt
 	
-Browse 	Home/Browsing page with 
-/list	Movies listing
-/list/:id	Detailed movie information
-/watchlist/add Add the watching for the current user (not available for guest visitor)
+Browse 	Home/Browsing page with    
+/list	Movies listing   
+/list/:id	Detailed movie information   
+/watchlist/add Add the watching for the current user (not available for guest visitor)   
 	
-Watchlist	
-/watchList -Current user's watchlist content
-/watchlist/watched	-List of movies user has seen
-/watchlist/wantToWatch	wish-watch-list
-/watchlist/edit	-edit the movies in the watchlist/
-/watchlist/editOrder	Order/Priority of the movies in the watchlist
-/watchlist/delete	-seen all? start from scratch!?
+Watchlist   	
+/watchList -Current user's watchlist content   
+/watchlist/watched	-List of movies user has seen     
+/watchlist/wantToWatch	wish-watch-list     
+/watchlist/edit	-edit the movies in the watchlist/     
+/watchlist/editOrder	Order/Priority of the movies in the watchlist     
+/watchlist/delete	-seen all? start from scratch!?     
 
 
 Squad-Lead: Alex Merced

@@ -6,7 +6,7 @@ Squad-Lead: Alex Merced
 Team Members: Bojan Josilo, Gourav Auluck, Sampreet Chawla, and Shayan Gagan. Sampreet Chawla is the Tech Lead and Git Master.
 
 
-| Route                  |                                   Function                                   |
+| Route                  |                                   Purpose                                   |
 | ---------------------- | :--------------------------------------------------------------------------: |
 | API/signin             |                       landing page with sign in prompt                       |
 | /list                  |                                Movies listing                                |

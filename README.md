@@ -17,7 +17,7 @@ Team Members: Bojan Josilo, Gourav Auluck, Sampreet Chawla, and Shayan Gagan. Sa
 | POST          | /watchList/planDate/:id      | Add a movie plan date for the movie with specific id |
 | PUT           | /watchList/watchDate/:id     |   Update watchDate for the movie with specific id    |
 | PUT           | /watchlist/watchOrder        | Update watchOrder for the the list of planned movies |
-| DELETE        | /watchlist/id                |        Delete movie from watchlist scratch!?         |
+| DELETE        | /watchlist/id                |             Delete movie from watchlist              |
 | GET           | /users                       |            Get all users - for debugging             |
 | POST          | /users                       |                  Add user / signup                   |
 | **GET / PUT** | /users/validate              |               Validate user on Sign In               |

@@ -20,7 +20,7 @@ Team Members: Bojan Josilo, Gourav Auluck, Sampreet Chawla, and Shayan Gagan. Sa
 | DELETE                                                   | /watchlist/id               |        Delete movie from watchlist scratch!?         |
 | GET                                                      | /users                      |            Get all users - for debugging             |
 | POST                                                     | /users                      |                  Add user / signup                   |
-| <span style="background-color: #FFFF00">GET / PUT</span> | /users/validate             |          Validate user on Sign In scratch!?          |
+| <span style="background-color: #ffff00">GET / PUT</span> | /users/validate             |          Validate user on Sign In scratch!?          |
 
 
 

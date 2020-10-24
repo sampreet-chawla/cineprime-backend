@@ -13,7 +13,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger('tiny'));
 
-// Add Custom Routers - Sample
+// Add Custom Routers 
+
+// Default route
+app.use("/", (req, res) => {
+    res.json("Welcome to cine-prime backend.");
+});
+
 //const cookbookRouter = require('./controllers/cookbookRoutes');
 //app.use('/api/cookbooks/', cookbookRouter);
 

@@ -5,7 +5,8 @@ const Movie = require('../models/movie');
 const router = require('express').Router();
 const MovieUtils = require('./movieUtils');
 
-// Add a movie for the specified movie id for a given user
+// Add a movie for the specified movie id for a given user name
+// Example - POST localhost:4501/api/movies/user/testCDE/635302
 router.post('/user/:user/:movieId', async (req, res) => {
 	const userName = req.params.user;
 	console.log('movieId : ', req.params.movieId);
@@ -50,7 +51,8 @@ router.post('/user/:user/:movieId', async (req, res) => {
 	}
 });
 
-// Get all want to watch movies
+// Get all want to watch movies for the specified user in ascending display order
+// GET localhost:4501/api/movies/wantToWatch/user/testCDE
 router.get('/wantToWatch/user/:user', async (req, res) => {
 	try {
 		// Fetch 'want to watch' movies with ascending display order for that user.
@@ -67,7 +69,7 @@ router.get('/wantToWatch/user/:user', async (req, res) => {
 });
 
 // Add / Update the planned date for a movie
-// localhost:4501/api/movies/planDate/2020-10-27/5f9570f76ac4631dd152a895
+// PUT localhost:4501/api/movies/planDate/2020-10-27/5f9570f76ac4631dd152a895
 router.put('/planDate/:planDate/:id', async (req, res) => {
 	try {
 		const updatedMovie = await Movie.findByIdAndUpdate(
@@ -82,7 +84,7 @@ router.put('/planDate/:planDate/:id', async (req, res) => {
 });
 
 // Add / Update the watch date for a movie
-// localhost:4501/api/movies/watchDate/2020-10-27/5f9570f76ac4631dd152a895
+// PUT localhost:4501/api/movies/watchDate/2020-10-27/5f9570f76ac4631dd152a895
 router.put('/watchDate/:watchDate/:id', async (req, res) => {
 	try {
 		const watchDate = new Date(req.params.watchDate);
@@ -109,22 +111,23 @@ router.put('/watchDate/:watchDate/:id', async (req, res) => {
 	}
 });
 
-// router.put('/saveOrder/user/:user', (req, res) => {
-// 	try {
-// 		const movies = MovieUtils.sortByFieldNumber(req.body, 'displayOrder');
-// 		let updatedMovies = [];
-// 		movies.map(async (movie, index) => {
-// 			const updateMovie = await Movie.findByIdAndUpdate(
-// 				movie.id,
-// 				{ displayOrder: index + 1 },
-// 				{ new: true }
-// 			);
-// 			updatedMovies.push(updateMovie);
-// 		});
-// 		res.json({ status: 200, data: updatedMovies });
-// 	} catch (err) {
-// 		res.json({ status: 500, error: err.message });
-// 	}
-// });
+// 
+// PUT localhost:4501/api/movies/watchOrder/user/testCDE
+router.put('/watchOrder/user/:user', async(req, res) => {
+	try {
+		const movies = MovieUtils.sortByFieldNumber(req.body, 'displayOrder');
+		const updatedMovies = await movies.map(async (movie, index) => {
+			return (updateMovie = await Movie.findByIdAndUpdate(
+				movie._id,
+				{ displayOrder: index + 1 },
+				{ new: true }
+			));
+		});
+		console.log('updatedMovies : ', updatedMovies);
+		res.json({ status: 200, msg: "Success" });
+	} catch (err) {
+		res.json({ status: 500, error: err.message });
+	}
+});
 
 module.exports = router;

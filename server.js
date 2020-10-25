@@ -16,11 +16,11 @@ app.use(logger('tiny'));
 // Add Custom Routers
 
 // Default route
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
 	res.json({ status: 200, msg: 'Welcome to cine-prime backend.' });
 });
 
-//const cookbookRouter = require('./controllers/cookbookRoutes');
-//app.use('/api/cookbooks/', cookbookRouter);
+const movieRouter = require('./controllers/movieRoutes');
+app.use('/api/movies/', movieRouter);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}!`));

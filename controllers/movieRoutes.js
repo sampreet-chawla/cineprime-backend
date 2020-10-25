@@ -111,9 +111,9 @@ router.put('/watchDate/:watchDate/:id', async (req, res) => {
 	}
 });
 
-// 
+// Saves the specified watch order for all the movies in the request body for the specified user name.
 // PUT localhost:4501/api/movies/watchOrder/user/testCDE
-router.put('/watchOrder/user/:user', async(req, res) => {
+router.put('/watchOrder/user/:user', async (req, res) => {
 	try {
 		const movies = MovieUtils.sortByFieldNumber(req.body, 'displayOrder');
 		const updatedMovies = await movies.map(async (movie, index) => {
@@ -124,7 +124,7 @@ router.put('/watchOrder/user/:user', async(req, res) => {
 			));
 		});
 		console.log('updatedMovies : ', updatedMovies);
-		res.json({ status: 200, msg: "Success" });
+		res.json({ status: 200, msg: 'Success' });
 	} catch (err) {
 		res.json({ status: 500, error: err.message });
 	}

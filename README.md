@@ -25,6 +25,32 @@ With BASE_URL as https://cineprime-backend.herokuapp.com
 
 $$  While adding watchDate, watch status is set to true, metTargetDate is set to true or false if watched date is before or on the planned date, i.e. target is met.
 
+## Schema
+
+### Movie Schema 
+
+```
+const MovieSchema = new Schema({
+	user: { type: String, required: true },
+	movieId: { type: Number, required: true },
+	title: { type: String, required: true },
+	description: { type: String, required: true },
+	releaseDate: { type: String, default: 'NA' },
+	rating: { type: Number, default: 0 },
+	reviewCount: { type: Number, default: 0 },
+	image: { type: String, required: true },
+	//genres: { type: String },
+	viewURL: { type: String, required: true },
+	runtime: { type: Number, default: 0 },
+	dateAdded: { type: Date, default: Date.now() },
+	datePlanned: { type: Date },
+	dateWatched: { type: Date },
+	displayOrder: { type: Number, default: 0 },
+	watchStatus: { type: Boolean, default: false },
+	metTargetDate: { type: Boolean, default: false },
+});
+```
+
 
 
 

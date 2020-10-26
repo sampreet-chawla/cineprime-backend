@@ -39,7 +39,7 @@ router.post('/user/:user/:movieId', async (req, res) => {
 			rating: tmdbMovie.vote_average,
 			reviewCount: tmdbMovie.vote_count,
 			image: IMAGE_BASE_URL + tmdbMovie.poster_path,
-			//genres: tmdbMovie.genres,// form a comma separated string
+			viewUrl: tmdbMovie.homepage,
 			runtime: tmdbMovie.runtime,
 			displayOrder: displayOrder,
 		};

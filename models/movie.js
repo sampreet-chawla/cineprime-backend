@@ -9,7 +9,7 @@ const MovieSchema = new Schema({
 	rating: { type: Number, default: 0 },
 	reviewCount: { type: Number, default: 0 },
 	image: { type: String, required: true },
-	//genres: { type: String },
+	viewUrl: { type: String },
 	runtime: { type: Number, default: 0 },
 	dateAdded: { type: Date, default: Date.now() },
 	datePlanned: { type: Date },

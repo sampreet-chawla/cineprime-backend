@@ -7,6 +7,7 @@ const MovieUtils = require('./movieUtils');
 
 // Add a movie for the specified movie id for a given user name
 // Example - POST localhost:4501/api/movies/user/testCDE/635302
+// Sample tmdbId - 635302, 724989, 337401, 694919, 539885
 router.post('/user/:user/:movieId', async (req, res) => {
 	const userName = req.params.user;
 	console.log('movieId : ', req.params.movieId);

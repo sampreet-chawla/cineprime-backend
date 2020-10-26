@@ -129,4 +129,53 @@ router.put('/watchOrder/user/:user', async (req, res) => {
 	}
 });
 
+// GET	/api/movies/all/user/:user	Get All Movies in the List(watched and want-to-watch) for the specified user name - TBD
+router.get('/all/user/:user', async (req, res) => {
+	try {
+		const movies = await Movie.find({
+			user: req.params.user,
+		});
+		res.json({ status: 200, data: movies });
+	} catch (err) {
+		res.json({ status: 500, error: err.message });
+	}
+});
+
+// GET	/api/movies/watched/user/:user	Get all movies with status "watched" for the specified user name - TBD
+router.get('/watched/user/:user', async (req, res) => {
+	try {
+		const movies = await Movie.find({
+			user: req.params.user,
+			watchStatus: true,
+		});
+		res.json({ status: 200, data: movies });
+	} catch (err) {
+		res.json({ status: 500, error: err.message });
+	}
+});
+
+// DELETE	/api/movies/id/:id	Delete movie specified by movie's Object id - TBD
+//delete route
+router.delete('/id/:id', async (req, res) => {
+	try {
+		await Movie.findByIdAndRemove(req.params.id);
+		res.json({ status: 200, msg: `Movie with ID ${req.params.id} deleted.` });
+	} catch (err) {
+		res.json({ status: 500, error: err.message });
+	}
+});
+
+// DELETE	/api/movies/user/:user	Delete all movie for the specified user name - TBD
+router.delete('/user/:user', async (req, res) => {
+	try {
+		await Movie.deleteMany({ user: req.params.user });
+		res.json({
+			status: 200,
+			msg: `Movie list for user ${req.params.user} is cleared.`,
+		});
+	} catch (err) {
+		res.json({ status: 500, error: err.message });
+	}
+});
+
 module.exports = router;

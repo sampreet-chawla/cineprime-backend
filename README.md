@@ -40,7 +40,6 @@ const MovieSchema = new Schema({
 	reviewCount: { type: Number, default: 0 },
 	image: { type: String, required: true },
 	//genres: { type: String },
-	viewURL: { type: String, required: true },
 	runtime: { type: Number, default: 0 },
 	dateAdded: { type: Date, default: Date.now() },
 	datePlanned: { type: Date },

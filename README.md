@@ -38,8 +38,8 @@ const MovieSchema = new Schema({
 	releaseDate: { type: String, default: 'NA' },
 	rating: { type: Number, default: 0 },
 	reviewCount: { type: Number, default: 0 },
-	image: { type: String, required: true },
-	//genres: { type: String },
+	image: { type: String, required: true }
+	viewURL: { type: String, required: true },
 	runtime: { type: Number, default: 0 },
 	dateAdded: { type: Date, default: Date.now() },
 	datePlanned: { type: Date },

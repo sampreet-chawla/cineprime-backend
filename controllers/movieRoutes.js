@@ -7,15 +7,13 @@ const MovieUtils = require('./movieUtils');
 
 // Add a movie for the specified movie id for a given user name
 // Example - POST localhost:4501/api/movies/user/testCDE/635302
-// Sample tmdbId - 635302, 724989, 337401, 694919, 539885
+// Sample tmdbId / movieId - 635302, 724989, 337401, 694919, 539885
 router.post('/user/:user/:movieId', async (req, res) => {
-	const userName = req.params.user;
-	console.log('movieId : ', req.params.movieId);
-	// Sample movie id - 635302
+	const username = req.params.user;
 	try {
 		// Calculate the display order
 		let displayOrder = 1;
-		await Movie.find({ user: userName, watchStatus: false })
+		await Movie.find({ username: username, watchStatus: false })
 			.sort({ displayOrder: -1 })
 			.exec(function (err, docs) {
 				if (docs.length > 0) {
@@ -27,11 +25,10 @@ router.post('/user/:user/:movieId', async (req, res) => {
 		const data = await axios({
 			url: `https://api.themoviedb.org/3/movie/${req.params.movieId}?api_key=${API_KEY}`,
 		});
-		console.log('tmdb data: ', data.data);
 		const tmdbMovie = data.data;
 		const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w185/';
 		const movie = {
-			user: userName,
+			username: username,
 			movieId: tmdbMovie.id,
 			title: tmdbMovie.title,
 			description: tmdbMovie.overview,
@@ -57,7 +54,7 @@ router.get('/wantToWatch/user/:user', async (req, res) => {
 	try {
 		// Fetch 'want to watch' movies with ascending display order for that user.
 		const movies = await Movie.find({
-			user: req.params.user,
+			username: req.params.user,
 			watchStatus: false,
 		}).sort({
 			displayOrder: 1,
@@ -91,7 +88,6 @@ router.put('/watchDate/:watchDate/:id', async (req, res) => {
 		const foundMovie = await Movie.findById(req.params.id);
 		const planDate = foundMovie.datePlanned;
 		let metTargetDate = false;
-		console.log(`${planDate} and ${watchDate}, ${watchDate <= planDate}`);
 		if (watchDate <= planDate) {
 			metTargetDate = true;
 		}
@@ -111,6 +107,51 @@ router.put('/watchDate/:watchDate/:id', async (req, res) => {
 	}
 });
 
+// Add / Update the plan date and watch date for a movie
+//PUT localhost:4501/api/movies/saveDates/5f9570f76ac4631dd152a895
+// Can give either "datePlanned" or both "datePlanned" and "dateWatched"
+/* req.body - 
+	{
+		"datePlanned": "2020-10-26",
+		"dateWatched": "2020-10-26"
+	}
+*/
+router.put('/saveDates/:id', async (req, res) => {
+	try {
+		const datePlanned = req.body.datePlanned;
+		const dateWatched = req.body.dateWatched;
+		let updatedMovie;
+		if (!dateWatched) {
+			updatedMovie = await Movie.findByIdAndUpdate(
+				req.params.id,
+				{ datePlanned: datePlanned },
+				{ new: true }
+			);
+		} else {
+			const watchDate = new Date(dateWatched);
+			const planDate = new Date(datePlanned);
+			let metTargetDate = false;
+			if (watchDate <= planDate) {
+				metTargetDate = true;
+			}
+			updatedMovie = await Movie.findByIdAndUpdate(
+				req.params.id,
+				{
+					datePlanned: planDate,
+					dateWatched: watchDate,
+					metTargetDate: metTargetDate,
+					watchStatus: true,
+					displayOrder: -1,
+				},
+				{ new: true }
+			);
+		}
+		res.json({ status: 200, data: updatedMovie });
+	} catch (err) {
+		res.json({ status: 500, error: err.message });
+	}
+});
+
 // Saves the specified watch order for all the movies in the request body for the specified user name.
 // PUT localhost:4501/api/movies/watchOrder/user/testCDE
 router.put('/watchOrder/user/:user', async (req, res) => {
@@ -123,7 +164,6 @@ router.put('/watchOrder/user/:user', async (req, res) => {
 				{ new: true }
 			));
 		});
-		console.log('updatedMovies : ', updatedMovies);
 		res.json({ status: 200, msg: 'Success' });
 	} catch (err) {
 		res.json({ status: 500, error: err.message });
@@ -134,7 +174,7 @@ router.put('/watchOrder/user/:user', async (req, res) => {
 router.get('/all/user/:user', async (req, res) => {
 	try {
 		const movies = await Movie.find({
-			user: req.params.user,
+			username: req.params.user,
 		});
 		res.json({ status: 200, data: movies });
 	} catch (err) {
@@ -146,7 +186,7 @@ router.get('/all/user/:user', async (req, res) => {
 router.get('/watched/user/:user', async (req, res) => {
 	try {
 		const movies = await Movie.find({
-			user: req.params.user,
+			username: req.params.user,
 			watchStatus: true,
 		});
 		res.json({ status: 200, data: movies });
@@ -169,7 +209,7 @@ router.delete('/id/:id', async (req, res) => {
 // DELETE	/api/movies/user/:user	Delete all movie for the specified user name - TBD
 router.delete('/user/:user', async (req, res) => {
 	try {
-		await Movie.deleteMany({ user: req.params.user });
+		await Movie.deleteMany({ username: req.params.user });
 		res.json({
 			status: 200,
 			msg: `Movie list for user ${req.params.user} is cleared.`,

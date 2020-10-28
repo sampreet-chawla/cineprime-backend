@@ -1,7 +1,7 @@
 const { Schema, model } = require('../db/conn');
 
 const MovieSchema = new Schema({
-	user: { type: String, required: true },
+	username: { type: String, required: true },
 	movieId: { type: Number, required: true },
 	title: { type: String, required: true },
 	description: { type: String, required: true },

@@ -107,43 +107,50 @@ router.put('/watchDate/:watchDate/:id', async (req, res) => {
 	}
 });
 
-// Add / Update the watch date for a movie
-// PUT localhost:4501/api/movies/watchDate/2020-10-27/5f9570f76ac4631dd152a895
-// router.put('/saveDates/:id', async (req, res) => {
-// 	try {
-// 		const datePlanned = req.body.datePlanned;
-// 		const dateWatched = req.body.dateWatched;
-// 		let updatedMovie;
-// 		if (!dateWatched) {
-// 			updatedMovie = await Movie.findByIdAndUpdate(
-// 				req.params.id,
-// 				{ datePlanned: datePlanned },
-// 				{ new: true }
-// 			);
-// 		} else {
-// 			const watchDate = new Date(dateWatched);
-// 			const planDate = new Date(datePlanned);
-// 			let metTargetDate = false;
-// 			if (watchDate <= planDate) {
-// 				metTargetDate = true;
-// 			}
-// 			updatedMovie = await Movie.findByIdAndUpdate(
-// 				req.params.id,
-// 				{
-// 					datePlanned: planDate,
-// 					dateWatched: watchDate,
-// 					metTargetDate: metTargetDate,
-// 					watchStatus: true,
-// 					displayOrder: -1,
-// 				},
-// 				{ new: true }
-// 			);
-// 		}
-// 		res.json({ status: 200, data: updatedMovie });
-// 	} catch (err) {
-// 		res.json({ status: 500, error: err.message });
-// 	}
-// });
+// Add / Update the plan date and watch date for a movie
+//PUT localhost:4501/api/movies/saveDates/5f9570f76ac4631dd152a895
+// Can give either "datePlanned" or both "datePlanned" and "dateWatched"
+/* req.body - 
+	{
+		"datePlanned": "2020-10-26",
+		"dateWatched": "2020-10-26"
+	}
+*/
+router.put('/saveDates/:id', async (req, res) => {
+	try {
+		const datePlanned = req.body.datePlanned;
+		const dateWatched = req.body.dateWatched;
+		let updatedMovie;
+		if (!dateWatched) {
+			updatedMovie = await Movie.findByIdAndUpdate(
+				req.params.id,
+				{ datePlanned: datePlanned },
+				{ new: true }
+			);
+		} else {
+			const watchDate = new Date(dateWatched);
+			const planDate = new Date(datePlanned);
+			let metTargetDate = false;
+			if (watchDate <= planDate) {
+				metTargetDate = true;
+			}
+			updatedMovie = await Movie.findByIdAndUpdate(
+				req.params.id,
+				{
+					datePlanned: planDate,
+					dateWatched: watchDate,
+					metTargetDate: metTargetDate,
+					watchStatus: true,
+					displayOrder: -1,
+				},
+				{ new: true }
+			);
+		}
+		res.json({ status: 200, data: updatedMovie });
+	} catch (err) {
+		res.json({ status: 500, error: err.message });
+	}
+});
 
 // Saves the specified watch order for all the movies in the request body for the specified user name.
 // PUT localhost:4501/api/movies/watchOrder/user/testCDE

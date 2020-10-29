@@ -121,7 +121,7 @@ router.put('/saveDates/:id', async (req, res) => {
 		const datePlanned = req.body.datePlanned;
 		const dateWatched = req.body.dateWatched;
 		let updatedMovie;
-		if (!dateWatched) {
+		if (dateWatched === null) {
 			updatedMovie = await Movie.findByIdAndUpdate(
 				req.params.id,
 				{ datePlanned: datePlanned },

@@ -23,11 +23,7 @@ app.get('/', (req, res) => {
 	res.json({ status: 200, msg: 'Welcome to cine-prime backend.' });
 });
 
-app.get('/user', auth, (req, res) => {
-	res.json({ status: 200, payload: req.payload });
-});
-
 const movieRouter = require('./controllers/movieRoutes');
-app.use('/api/movies/', movieRouter);
+app.use('/api/movies/', auth, movieRouter);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}!`));

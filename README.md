@@ -14,7 +14,7 @@ With BASE_URL as https://cineprime-backend.herokuapp.com
 | GET           | /api/movies/all/user/:user              | Get All Movies in the List(watched and want-to-watch) for the specified user name |
 | GET           | /api/movies/watched/user/:user          | Get all movies with status "watched" for the specified user name |
 | GET           | /api/movies/wantToWatch/user/:user      | Get all movies with status "want to watch"  for the specified user name in ascending display order - under test |
-| POST          | /api/movies/user/:user/:movieId         | Add the specified movie (movieId) to the end of user's watchlist for the specified user name  |
+| POST          | /api/movies/user/:user/:movieId         | Add the specified movie (movieId) with details in request body, to user's watchlist for the specified user name  |
 | PUT           | /api/movies/planDate/:planDate/:id      | Add / Update the planned date for a movie with specified movie's ObjectId, Plan-date format "2020-10-27" | 
 | PUT           | /api/movies/watchDate/:watchDate/:id    | Adds watched date for a movie with specified movie's ObjectId, Watched-date format "2020-10-27". For more, refer$$|
 | PUT           | /api/movies/saveDates/:id               | Adds either datePlanned or both datePlanned and dateWatched for a movie's ObjectId, dates in request body |
@@ -51,6 +51,22 @@ const MovieSchema = new Schema({
 });
 ```
 
+### User Schema
+
+```
+const UserSchema = new Schema(
+	{
+		username: { type: String, required: true },
+		password: { type: String, required: true },
+	},
+	{ timestamps: true }
+);
+```
+
+## Project Management
+
+- [Trello](https://trello.com/b/EJ9QY78d/cineprime) - Kanban Project Board for project tracking
+- [Notion.so](https://www.notion.so/cineprime-GA-Unit-3-Team-Project-ae323db2fa4747e3898633814265c832) - For Team and Project Information
 
 
 

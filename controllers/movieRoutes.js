@@ -22,22 +22,24 @@ router.post('/user/:user/:movieId', async (req, res) => {
 			});
 
 		// Fetch the movie details
-		const data = await axios({
-			url: `https://api.themoviedb.org/3/movie/${req.params.movieId}?api_key=${API_KEY}`,
-		});
-		const tmdbMovie = data.data;
+		// const data = await axios({
+		// 	url: `https://api.themoviedb.org/3/movie/${req.params.movieId}?api_key=${API_KEY}`,
+		// });
+		// const tmdbMovie = data.data;
+		const tmdbMovie = req.body;
+		console.log('tmdbMovie from req.body: ', tmdbMovie);
 		const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w185/';
 		const movie = {
 			username: username,
 			movieId: tmdbMovie.id,
-			title: tmdbMovie.title,
+			title: tmdbMovie.name,
 			description: tmdbMovie.overview,
-			releaseDate: tmdbMovie.release_date,
+			releaseDate: tmdbMovie.first_air_date,
 			rating: tmdbMovie.vote_average,
 			reviewCount: tmdbMovie.vote_count,
 			image: IMAGE_BASE_URL + tmdbMovie.poster_path,
-			viewUrl: tmdbMovie.homepage,
-			runtime: tmdbMovie.runtime,
+			viewUrl: '',
+			runtime: 0,
 			displayOrder: displayOrder,
 		};
 		// Save the movie details

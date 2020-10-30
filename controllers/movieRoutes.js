@@ -21,13 +21,7 @@ router.post('/user/:user/:movieId', async (req, res) => {
 				}
 			});
 
-		// Fetch the movie details
-		// const data = await axios({
-		// 	url: `https://api.themoviedb.org/3/movie/${req.params.movieId}?api_key=${API_KEY}`,
-		// });
-		// const tmdbMovie = data.data;
 		const tmdbMovie = req.body;
-		console.log('tmdbMovie from req.body: ', tmdbMovie);
 		const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w185/';
 		const movie = {
 			username: username,

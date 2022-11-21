@@ -7,7 +7,7 @@ Team Members: Bojan Josilo, Gourav Auluck, Sampreet Chawla, and Shayan Gagan. Sa
 
 ## Router Table
 
-With BASE_URL as https://cineprime-backend.herokuapp.com
+With BASE_URL as  https://cineprime-backend.onrender.com  as on Nov 20, 2022 (Old Heorku URL as on Nov 2020 - https://cineprime-backend.herokuapp.com)
 
 | Method        | Route                                   |                       Purpose                                    | 
 | ------------- | --------------------------------------- | :--------------------------------------------------------------: |
